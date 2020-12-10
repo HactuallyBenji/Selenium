@@ -72,6 +72,42 @@ public class _SeleniumEasyTests {
         }
     }
 
+    @Test
+    public void inputFormSelectingAllOptionsTest() {
+        driver.navigate().to("https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+
+        List<String> dropdownExpectedValues = new ArrayList<String>();
+        dropdownExpectedValues.add("dummy");
+        dropdownExpectedValues.add("dummy");
+        dropdownExpectedValues.add("Day selected :- Sunday");
+        dropdownExpectedValues.add("Day selected :- Monday");
+        dropdownExpectedValues.add("Day selected :- Tuesday");
+        dropdownExpectedValues.add("Day selected :- Wednesday");
+        dropdownExpectedValues.add("Day selected :- Thursday");
+        dropdownExpectedValues.add("Day selected :- Friday");
+        dropdownExpectedValues.add("Day selected :- Saturday");
+
+
+        for(int i = 2; i < 9; i++) {
+            WebElement dropdownValue = driver.findElement(By.cssSelector("#select-demo > option:nth-child(" + i + ")"));
+            String expectedValue = dropdownExpectedValues.get(i);
+            //System.out.println(expectedValue);
+            //System.out.println(dropdownValue.getText());
+            WebElement printedValue = driver.findElement(By.cssSelector("#easycont > div > " +
+                    "div.col-md-6.text-left > div:nth-child(4) > div.panel-body > p.selected-value"));
+
+            dropdownValue.click();
+
+            assert(printedValue.getText()).contains(dropdownExpectedValues.get(i));
+        }
+    }
+
+
+    @Test
+    public void inputFormsBlackBoxTest() {
+        
+    }
+
     @After
     public void tearDown(){
         System.out.println("");
